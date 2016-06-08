@@ -20,5 +20,5 @@ mvn spring-boot:run
 ```
 
 Further explanation of each module:
-* Backend & DB structure
-* Client
+* [Backend & DB structure](https://github.com/umbreak/spring-boot-example/tree/master/backend)
+* [Information Requester (Client)](https://github.com/umbreak/spring-boot-example/tree/master/information-requester)
