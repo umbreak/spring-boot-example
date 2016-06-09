@@ -29,3 +29,6 @@ For a more detailed informatino about the DB structure and the relationships, ch
 ![DB design](https://github.com/umbreak/spring-boot-example/raw/master/backend/database_schema.png)
 
 The database is created every time the backend is started (and dropped every time too, just for test purposes). The content can be found in the file `schema-h2.sql` and `data.sql`.
+
+###DB Connection (H2 console)
+To connect to the DB console go to the url `http://localhost:8082/` and set the field `JDBC URL:` to `jdbc:h2:mem:dataSource`
