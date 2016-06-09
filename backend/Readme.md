@@ -20,7 +20,11 @@ curl -u 'user2:secret2' -H "Content-Type: application/json" -X POST -d '{"provid
 ```
 curl -u 'user3:secret3' -X GET "http://localhost:8181/provider"
 ```
-##DB Structure
+##DB The backend has a Scheduled task (SubscriptionScheduledTasks.java running every 24hours) which will do as follows:
+1. Check all the subscriptions.
+2. Find out if the subscription should be sent now (depending on the frequency and the last date sent previously).
+3. In affirmative case, perform the request the information requester has been subscribed for.
+4. Send the response from the request to the iformation requester through the desired channel. Note that this part is not fully implemented: There are several classes implementing the interface ChannelSenderProvider, buthe implementation is missing. However, is a prove of concept.Structure
 Every `information-requester` has some roles and every `information provider` can be accessed through some roles. So, not all `information-requesters` can access all `information providers`.
 
 At the same time, each `survey` belong to an `information provider`.
@@ -32,3 +36,13 @@ The database is created every time the backend is started (and dropped every tim
 
 ###DB Connection (H2 console)
 To connect to the DB console go to the url `http://localhost:8082/` and set the field `JDBC URL:` to `jdbc:h2:mem:dataSource`
+
+##Subscription to survey's targets
+The `information-requester`, when performing a search query to the API on a specific survey and filtered for specific target, can point out that he(she wants to be subscribed for that query. In this case, the backend would have to report to the `information-requester` with this information through the channel chosen by the information-requester.
+
+The backend has a Scheduled task (SubscriptionScheduledTasks.java running every 24hours) which will do as follows:
+
+1. Check all the subscriptions.
+2. Find out if the subscription should be sent now (depending on the frequency and the last date sent previously).
+3. In affirmative case, perform the request the information requester has been subscribed for.
+4. Send the response to the iformation requester through the desired channel. Note that this part is not fully implemented: There are several classes implementing the interface ChannelSenderProvider, buthe implementation is missing. However, is a prove of concept.
